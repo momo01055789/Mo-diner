@@ -27,10 +27,8 @@ window.addEventListener('scroll',function(){
     navbar.classList.toggle('sticky',window.scrollY > 0)
 });
 window.addEventListener('resize',function(){
-    if (window.innerWidth > 650) {
-        let navbar = document.querySelector('.nav-bar')
-        navbar.classList.remove('active')
-    }
+    let navbar = document.querySelector('.nav-bar')
+    navbar.classList.remove('active')
 });
 window.onload = function(){
 let open = document.querySelector('.res-box')
@@ -75,6 +73,7 @@ let open = document.querySelector('.res-box')
             border-radius:20px;
             transition:.5s;
             position: fixed;
+            transition: all .5s ease-in-out;
             left: 0;
             right: 0;
             top:15px;
