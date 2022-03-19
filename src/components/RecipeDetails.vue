@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <div>
     <div class="recipe-box" v-for="(item, index) in data" :key="index">
       <div class="flip-card">
         <div class="flipcard-inner">
@@ -51,8 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main-container {
-  position: relative;
   .error {
     position: absolute;
     bottom: 0;
@@ -156,7 +154,6 @@ export default {
       }
     }
   }
-}
 
 @keyframes zoomin {
   0% {

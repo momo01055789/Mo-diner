@@ -69,7 +69,7 @@ export default {
         border: 3px solid #ddd;
         font-size: 3ch;
         color: #444;
-        width: 50vw;
+        width: 65vw;
         animation: expand 600ms ease-in-out;
       }
       button {
