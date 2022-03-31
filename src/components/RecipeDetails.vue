@@ -61,13 +61,16 @@ export default {
   animation: appear 0.5s ease-in-out;
 }
 .loading {
-  width: 80%;
   color: #676767;
+  background-color: #fff;
   font-weight: bold;
   text-align: center;
   font-size: 5ch;
   position: absolute;
   bottom: 0;
+  left: 10%;
+  right: 10%;
+  border-radius: 15px;
 }
 .recipe-box {
   display: flex;
@@ -276,7 +279,7 @@ export default {
   }
   .loading {
     font-size: 3.4ch;
-    bottom: 8%;
+    bottom: 6%;
   }
 }
 @media screen and (max-width: 450px) {
