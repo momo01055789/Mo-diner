@@ -34,126 +34,133 @@
     <h3 class="error" v-if="data && data.length === 0">
       No Recipes were found :(
     </h3>
+    <p class="loading" v-if="loading">Loading...</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["data"],
+  props: ["data", "loading"],
   data() {
-    return {
-        loading:null,
-    };
+    return {};
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 
 <style lang="scss" scoped>
-  .error {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 5ch;
-    color: #fff;
-    padding: 15px 10px;
-    animation: appear 0.5s ease-in-out;
-  }
-  .recipe-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background: #333e52;
-    padding: 5%;
-    color: #fff;
-    perspective: 800px;
-    .flip-card {
-      background-color: transparent;
-      width: 80%;
-      height: 400px;
-      perspective: 1000px; /* Remove this if you don't want the 3D effect */
-      animation: zoomin 2s ease-in-out;
-      .flipcard-inner {
-        position: relative;
+.error {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 5ch;
+  color: #fff;
+  padding: 15px 10px;
+  animation: appear 0.5s ease-in-out;
+}
+.loading {
+  width: 80%;
+  color: #676767;
+  font-weight: bold;
+  text-align: center;
+  font-size: 5ch;
+  position: absolute;
+  bottom: 0;
+}
+.recipe-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #333e52;
+  padding: 5%;
+  color: #fff;
+  perspective: 800px;
+  .flip-card {
+    background-color: transparent;
+    width: 80%;
+    height: 400px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    animation: zoomin 2s ease-in-out;
+    .flipcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      .flipcard-front,
+      .flipcard-back {
+        position: absolute;
         width: 100%;
         height: 100%;
-        text-align: center;
-        transition: transform 0.8s;
-        transform-style: preserve-3d;
-        .flipcard-front,
-        .flipcard-back {
-          position: absolute;
+        -webkit-backface-visibility: hidden; /* Safari */
+        backface-visibility: hidden;
+        ul {
+          margin: 0;
+          padding: 0;
+        }
+      }
+      .flipcard-front {
+        background-color: #bbb;
+        color: black;
+        img {
+          border-radius: 5px;
           width: 100%;
           height: 100%;
-          -webkit-backface-visibility: hidden; /* Safari */
-          backface-visibility: hidden;
-          ul {
-            margin: 0;
-            padding: 0;
-          }
         }
-        .flipcard-front {
-          background-color: #bbb;
-          color: black;
-          img {
-            border-radius: 5px;
-            width: 100%;
-            height: 100%;
-          }
-        }
+      }
 
-        .flipcard-back {
-          background-color: #778294;
-          color: white;
-          transform: rotateY(180deg);
-          ul {
-            li {
-              list-style: none;
-            }
+      .flipcard-back {
+        background-color: #778294;
+        color: white;
+        transform: rotateY(180deg);
+        ul {
+          li {
+            list-style: none;
           }
         }
-      }
-    }
-    .flip-card:hover .flipcard-inner {
-      transform: rotateY(180deg);
-    }
-    .text-desc {
-      display: flex;
-      flex-direction: column;
-      margin: 0 50px;
-      width: 100%;
-      position: relative;
-      animation: comein 2s ease-in-out;
-      h2 {
-        margin: 0;
-        text-align: center;
-        font-size: 5ch;
-      }
-      h3 {
-        font-size: 4ch;
-        margin: 0;
-      }
-      ul {
-        padding: 0;
-        li {
-          list-style: none;
-          font-size: 2.5ch;
-        }
-      }
-      span {
-        position: relative;
-        bottom: -10%;
-        padding: 10px;
-        background: #daa21c;
-        border-radius: 20px;
-        font-weight: 600;
-        width: max-content;
       }
     }
   }
+  .flip-card:hover .flipcard-inner {
+    transform: rotateY(180deg);
+  }
+  .text-desc {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+    width: 100%;
+    position: relative;
+    animation: comein 2s ease-in-out;
+    h2 {
+      margin: 0;
+      text-align: center;
+      font-size: 5ch;
+    }
+    h3 {
+      font-size: 4ch;
+      margin: 0;
+    }
+    ul {
+      padding: 0;
+      li {
+        list-style: none;
+        font-size: 2.5ch;
+      }
+    }
+    span {
+      position: relative;
+      bottom: -10%;
+      padding: 10px;
+      background: #daa21c;
+      border-radius: 20px;
+      font-weight: 600;
+      width: max-content;
+    }
+  }
+}
 
 @keyframes zoomin {
   0% {
@@ -224,6 +231,9 @@ export default {
     font-size: 4.3ch;
     color: #fff;
   }
+  .loading {
+    font-size: 4.3ch;
+  }
 }
 @media screen and (max-width: 690px) {
   .recipe-box {
@@ -264,10 +274,17 @@ export default {
     font-size: 3.4ch;
     bottom: 8%;
   }
+  .loading {
+    font-size: 3.4ch;
+    bottom: 8%;
+  }
 }
 @media screen and (max-width: 450px) {
   .error {
     font-size: 2.1ch;
+  }
+  .loading {
+    font-size: 2.5ch;
   }
   .recipe-box {
     .flip-card {

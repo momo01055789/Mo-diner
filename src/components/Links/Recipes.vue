@@ -9,7 +9,7 @@
       </form>
     </div>
   </div>
-  <recipe-details :data="recipe" />
+  <recipe-details :data="recipe" :loading="loading" />
 </template>
 
 <script>
@@ -20,10 +20,12 @@ export default {
     return {
       query: "",
       recipe: null,
+      loading: false,
     };
   },
   methods: {
     search() {
+      this.loading = true;
       fetch(`https://recipesapi2.p.rapidapi.com/recipes/${this.query}`, {
         method: "GET",
         headers: {
@@ -36,6 +38,7 @@ export default {
         .then((response) => {
           this.recipe = response.data;
           this.query = "";
+          this.loading = false;
         })
         .catch((err) => {
           console.error(err);
@@ -95,7 +98,7 @@ export default {
     opacity: 0.3;
   }
   100% {
-    width: 50vw;
+    width: 65vw;
     opacity: 1;
   }
 }
@@ -103,7 +106,7 @@ export default {
 @media screen and (max-width: 600px) {
   .box {
     .search-box {
-      .group {
+      form {
         input {
           font-size: 2ch;
         }
@@ -119,7 +122,7 @@ export default {
 @media screen and (max-width: 400px) {
   .box {
     .search-box {
-      .group {
+      form {
         input {
           font-size: 1.5ch;
           padding: 6px 5px;
